@@ -1,0 +1,4 @@
+#玩家的昵称
+name: null
+#玩家的未读消息<Map>
+Message: []

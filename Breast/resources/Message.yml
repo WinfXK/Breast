@@ -26,6 +26,9 @@ lang: chs-中文
 金币不足: §4您的财产不足以完成此操作！
 数据处理错误: §4无法处理该操作！请联系服务器管理员{n}{Error}
 NotPlayer: §4请在游戏内执行此命令
+Form:
+   MainForm:
+      Title: '{RGBTextStart}{PluginName}{RGBTextEnd}'
 Update:
    Start: §6检查更新中！若不想使用该功能或出现问题，请关闭该功能.
    Update: §6已检测到更新！{Msg} §4相关数据以储存到§5{ConfigName}

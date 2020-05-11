@@ -1,0 +1,108 @@
+Enchant1:
+  ID: 0
+  Name: 保护
+Enchant2:
+  ID: 1
+  Name: 火焰保护
+Enchant3:
+  ID: 2
+  Name: 摔落保护
+Enchant4:
+  ID: 3
+  Name: 爆炸保护
+Enchant5:
+  ID: 4
+  Name: 弹射物保护
+Enchant6:
+  ID: 5
+  Name: 荆棘
+Enchant7:
+  ID: 6
+  Name: 水下呼吸
+Enchant8:
+  ID: 7
+  Name: 深海探索者
+Enchant9:
+  ID: 8
+  Name: 水下速掘
+Enchant10:
+  ID: 9
+  Name: 锋利
+Enchant11:
+  ID: 10
+  Name: 亡灵杀手
+Enchant12:
+  ID: 11
+  Name: 节肢杀手
+Enchant13:
+  ID: 12
+  Name: 击退
+Enchant14:
+  ID: 13
+  Name: 火焰附加
+Enchant15:
+  ID: 14
+  Name: 抢夺
+Enchant16:
+  ID: 15
+  Name: 效率
+Enchant17:
+  ID: 16
+  Name: 精准采集
+Enchant18:
+  ID: 17
+  Name: 耐久
+Enchant19:
+  ID: 18
+  Name: 时运
+Enchant20:
+  ID: 19
+  Name: 力量
+Enchant21:
+  ID: 20
+  Name: 冲击
+Enchant22:
+  ID: 21
+  Name: 火矢
+Enchant23:
+  ID: 22
+  Name: 无限
+Enchant24:
+  ID: 23
+  Name: 海之眷顾
+Enchant25:
+  ID: 24
+  Name: 饵钓
+Enchant26:
+  ID: 25
+  Name: 冰霜行者
+Enchant27:
+  ID: 26
+  Name: 经验修补
+Enchant28:
+  ID: 27
+  Name: 绑定诅咒
+Enchant29:
+  ID: 28
+  Name: 消失诅咒
+Enchant30:
+  ID: 29
+  Name: 穿刺
+Enchant31:
+  ID: 30
+  Name: 激流
+Enchant32:
+  ID: 31
+  Name: 忠诚
+Enchant33:
+  ID: 32
+  Name: 引雷
+Enchant34:
+  ID: 33
+  Name: 多重射击
+Enchant35:
+  ID: 34
+  Name: 穿透
+Enchant36:
+  ID: 35
+  Name: 快速装填

@@ -1,5 +1,6 @@
 package cn.winfxk.breast;
 
+import java.io.File;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HashMap;
@@ -17,6 +18,8 @@ import cn.nukkit.utils.Utils;
 import cn.winfxk.breast.money.EconomyAPI;
 import cn.winfxk.breast.money.EconomyManage;
 import cn.winfxk.breast.money.MyEconomy;
+import cn.winfxk.breast.tool.EnchantList;
+import cn.winfxk.breast.tool.ItemList;
 import cn.winfxk.breast.tool.Tool;
 import cn.winfxk.breast.tool.Update;
 
@@ -31,14 +34,14 @@ public class Activate {
 	public final static String MessageFileName = "Message.yml", ConfigFileName = "Config.yml",
 			CommandFileName = "Command.yml", EconomyListConfigName = "EconomyList.yml", FormIDFileName = "FormID.yml",
 			PlayerDataDirName = "Players", LanguageDirName = "language", SystemFileName = "System.xml",
-			TeamDirName = "Team", TeamEffectName = "TeamEffectShop.yml";
+			ShopName = "Shop.yml", ItemListName = "ItemList.yml", EnchantListName = "EnchantList.yml";
 	private static Activate activate;
 	private MyEconomy economy;
 	private EconomyManage money;
 	private LinkedHashMap<String, MyPlayer> Players;
 	protected FormID FormID;
 	protected Message message;
-	protected Config config, CommandConfig;
+	protected Config config, CommandConfig, ShopConfig, ItemListConfig, EnchantListConfig;
 	/**
 	 * 默认要加载的配置文件，这些文件将会被用于与插件自带数据匹配
 	 */
@@ -50,8 +53,10 @@ public class Activate {
 	/**
 	 * 只加载一次的数据
 	 */
-	protected static final String[] ForOnce = { ConfigFileName };
-	protected static final String[] Mkdir = { TeamDirName, PlayerDataDirName };
+	protected static final String[] ForOnce = { ConfigFileName, EnchantListName, ItemListName };
+	protected static final String[] Mkdir = { PlayerDataDirName };
+	private ItemList items;
+	private EnchantList enchants;
 
 	/**
 	 * 插件数据的集合类
@@ -66,14 +71,53 @@ public class Activate {
 		if ((resCheck = new ResCheck(this).start()) == null)
 			return;
 		money = new EconomyManage();
+		EnchantListConfig = new Config(new File(mis.getDataFolder(), EnchantListName), Config.YAML);
+		ItemListConfig = new Config(new File(mis.getDataFolder(), ItemListName), Config.YAML);
 		Plugin plugin = Server.getInstance().getPluginManager().getPlugin(EconomyAPI.Name);
 		if (plugin != null)
 			money.addEconomyAPI(new EconomyAPI(this));
 		economy = money.getEconomy(config.getString("默认货币"));
 		if (config.getBoolean("检查更新"))
 			(new Update(kis)).start();
+		items = new ItemList(this);
+		enchants = new EnchantList(this);
 		kis.getLogger().info(message.getMessage("插件启动", "{loadTime}",
 				(float) Duration.between(mis.loadTime, Instant.now()).toMillis() + "ms") + "-Alpha");
+	}
+
+	public EnchantList getEnchants() {
+		return enchants;
+	}
+
+	public ItemList getItems() {
+		return items;
+	}
+
+	/**
+	 * 返回附魔列表的配置文件
+	 * 
+	 * @return
+	 */
+	public Config getEnchantListConfig() {
+		return EnchantListConfig;
+	}
+
+	/**
+	 * 返回命令列表的配置文件
+	 * 
+	 * @return
+	 */
+	public Config getCommandConfig() {
+		return CommandConfig;
+	}
+
+	/**
+	 * 返回物品列表的配置文件
+	 * 
+	 * @return
+	 */
+	public Config getItemListConfig() {
+		return ItemListConfig;
 	}
 
 	/**
