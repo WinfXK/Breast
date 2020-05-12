@@ -34,14 +34,15 @@ public class Activate {
 	public final static String MessageFileName = "Message.yml", ConfigFileName = "Config.yml",
 			CommandFileName = "Command.yml", EconomyListConfigName = "EconomyList.yml", FormIDFileName = "FormID.yml",
 			PlayerDataDirName = "Players", LanguageDirName = "language", SystemFileName = "System.xml",
-			ShopName = "Shop.yml", ItemListName = "ItemList.yml", EnchantListName = "EnchantList.yml";
+			ShopName = "Shop.yml", ItemListName = "ItemList.yml", EnchantListName = "EnchantList.yml",
+			NBTName = "MyNBT.yml";
 	private static Activate activate;
 	private MyEconomy economy;
 	private EconomyManage money;
 	private LinkedHashMap<String, MyPlayer> Players;
 	protected FormID FormID;
 	protected Message message;
-	protected Config config, CommandConfig, ShopConfig, ItemListConfig, EnchantListConfig;
+	protected Config config, CommandConfig, ShopConfig, ItemListConfig, EnchantListConfig, NBTConfig;
 	/**
 	 * 默认要加载的配置文件，这些文件将会被用于与插件自带数据匹配
 	 */
@@ -71,6 +72,7 @@ public class Activate {
 		if ((resCheck = new ResCheck(this).start()) == null)
 			return;
 		money = new EconomyManage();
+		ShopConfig = new Config(new File(mis.getDataFolder(), ShopName), Config.YAML);
 		EnchantListConfig = new Config(new File(mis.getDataFolder(), EnchantListName), Config.YAML);
 		ItemListConfig = new Config(new File(mis.getDataFolder(), ItemListName), Config.YAML);
 		Plugin plugin = Server.getInstance().getPluginManager().getPlugin(EconomyAPI.Name);
@@ -81,16 +83,45 @@ public class Activate {
 			(new Update(kis)).start();
 		items = new ItemList(this);
 		enchants = new EnchantList(this);
+		NBTConfig = new Config(new File(mis.getDataFolder(), NBTName), Config.YAML);
 		kis.getLogger().info(message.getMessage("插件启动", "{loadTime}",
 				(float) Duration.between(mis.loadTime, Instant.now()).toMillis() + "ms") + "-Alpha");
 	}
 
+	/**
+	 * 获取我的NBT列表的配置文件
+	 * 
+	 * @return
+	 */
+	public Config getNBTConfig() {
+		return NBTConfig;
+	}
+
+	/**
+	 * 获取附魔列表的管理器
+	 * 
+	 * @return
+	 */
 	public EnchantList getEnchants() {
 		return enchants;
 	}
 
+	/**
+	 * 获取物品列表的管理器
+	 * 
+	 * @return
+	 */
 	public ItemList getItems() {
 		return items;
+	}
+
+	/**
+	 * 获取商店的配置文件
+	 * 
+	 * @return
+	 */
+	public Config getShopConfig() {
+		return ShopConfig;
 	}
 
 	/**

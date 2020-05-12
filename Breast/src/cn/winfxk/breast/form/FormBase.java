@@ -12,6 +12,7 @@ import cn.winfxk.breast.Activate;
 import cn.winfxk.breast.FormID;
 import cn.winfxk.breast.Message;
 import cn.winfxk.breast.MyPlayer;
+import cn.winfxk.breast.tool.ItemList;
 
 /**
  * 基础UI操作类
@@ -31,7 +32,7 @@ public abstract class FormBase implements Cloneable {
 	protected MyPlayer myPlayer;
 	protected List<String> listKey = new ArrayList<>();
 	protected static final String Close = "Close", Back = "Back";
-	protected String Title = "Title", Content = "Content";
+	protected ItemList itemList;
 
 	/**
 	 * 界面交互基础类
@@ -53,12 +54,36 @@ public abstract class FormBase implements Cloneable {
 			e.printStackTrace();
 			this.upForm = null;
 		}
-		reloadTC();
+		setK("{Player}", "{Money}");
+		setD(player.getName(), myPlayer.getMoney());
+		itemList = ac.getItems();
 	}
 
-	protected void reloadTC() {
-		Title = msg.getSun(t, Son, "Title", this);
-		Content = msg.getSun(t, Son, "Content", this);
+	/**
+	 * 返回按钮的内容
+	 * 
+	 * @return
+	 */
+	protected String getBack() {
+		return msg.getSon(t, upForm == null ? "Back" : "Close", this);
+	}
+
+	/**
+	 * 获取标题
+	 * 
+	 * @return
+	 */
+	protected String getTitle() {
+		return msg.getSun(t, Son, "Title", this);
+	}
+
+	/**
+	 * 获取内容
+	 * 
+	 * @return
+	 */
+	protected String getContent() {
+		return msg.getSun(t, Son, "Content", this);
 	}
 
 	/**
@@ -66,7 +91,7 @@ public abstract class FormBase implements Cloneable {
 	 * 
 	 * @param string
 	 */
-	public void setT(String string) {
+	protected void setT(String string) {
 		t = string;
 	}
 
@@ -76,7 +101,7 @@ public abstract class FormBase implements Cloneable {
 	 *
 	 * @return 不重复的ID
 	 */
-	public int getID() {
+	protected int getID() {
 		int i = 0;
 		switch (myPlayer.ID) {
 		case 0:
@@ -132,7 +157,7 @@ public abstract class FormBase implements Cloneable {
 	 * @param data 默认的数据
 	 * @return 自定义数据
 	 */
-	public FormResponseCustom getCustom(FormResponse data) {
+	protected FormResponseCustom getCustom(FormResponse data) {
 		return (FormResponseCustom) data;
 	}
 
@@ -142,7 +167,7 @@ public abstract class FormBase implements Cloneable {
 	 * @param data 默认的数据
 	 * @return 简单截面数据
 	 */
-	public FormResponseSimple getSimple(FormResponse data) {
+	protected FormResponseSimple getSimple(FormResponse data) {
 		return (FormResponseSimple) data;
 	}
 
@@ -152,7 +177,7 @@ public abstract class FormBase implements Cloneable {
 	 * @param data 默认的数据
 	 * @return 选择型界面的数据
 	 */
-	public FormResponseModal getModal(FormResponse data) {
+	protected FormResponseModal getModal(FormResponse data) {
 		return (FormResponseModal) data;
 	}
 
@@ -161,7 +186,7 @@ public abstract class FormBase implements Cloneable {
 	 *
 	 * @param objects 要设置的Msg数据
 	 */
-	public void setD(Object... objects) {
+	protected void setD(Object... objects) {
 		D = objects;
 	}
 
@@ -170,7 +195,7 @@ public abstract class FormBase implements Cloneable {
 	 *
 	 * @param strings 要设置的Msg键
 	 */
-	public void setK(String... strings) {
+	protected void setK(String... strings) {
 		K = strings;
 	}
 
@@ -180,7 +205,7 @@ public abstract class FormBase implements Cloneable {
 	 * @param base 即将给玩家显示的界面对象
 	 * @return 当前操作的界面
 	 */
-	public FormBase setForm(FormBase base) {
+	protected FormBase setForm(FormBase base) {
 		make = base;
 		return this;
 	}
@@ -215,8 +240,27 @@ public abstract class FormBase implements Cloneable {
 	 * 
 	 * @param name
 	 */
-	public void setName(String name) {
+	protected void setName(String name) {
 		Name = name;
+	}
+
+	/**
+	 * 根据数据获取一个吻文本
+	 * 
+	 * @return
+	 */
+	protected String getString(String string, String[] K, Object[] D) {
+		return msg.getSun(t, Son, string, K, D);
+	}
+
+	/**
+	 * 根据数据获取一个吻文本
+	 * 
+	 * @param string
+	 * @return
+	 */
+	protected String getString(String string) {
+		return msg.getSun(t, Son, string, this);
 	}
 
 	@Override

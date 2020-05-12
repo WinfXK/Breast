@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -1191,13 +1190,7 @@ public class Tool implements X509TrustManager, HostnameVerifier {
 	 */
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValueAscending(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
-		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
-			@Override
-			public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
-				int compare = o1.getValue().compareTo(o2.getValue());
-				return compare;
-			}
-		});
+		Collections.sort(list, (o1, o2) -> o1.getValue().compareTo(o2.getValue()));
 		Map<K, V> result = new LinkedHashMap<>();
 		for (Map.Entry<K, V> entry : list)
 			result.put(entry.getKey(), entry.getValue());
@@ -1214,13 +1207,7 @@ public class Tool implements X509TrustManager, HostnameVerifier {
 	 */
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValueDescending(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
-		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {
-			@Override
-			public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2) {
-				int compare = o1.getValue().compareTo(o2.getValue());
-				return -compare;
-			}
-		});
+		Collections.sort(list, (o1, o2) -> -o1.getValue().compareTo(o2.getValue()));
 		Map<K, V> result = new LinkedHashMap<>();
 		for (Map.Entry<K, V> entry : list)
 			result.put(entry.getKey(), entry.getValue());

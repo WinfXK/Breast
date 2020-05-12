@@ -1,3 +1,6 @@
 EconomyAPI货币名称: 金币
 默认货币: EconomyAPI
 检查更新: true
+#是否开启仅允许管理员设置
+astrictAdmin: false
+Admin: []

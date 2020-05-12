@@ -27,8 +27,29 @@ lang: chs-中文
 数据处理错误: §4无法处理该操作！请联系服务器管理员{n}{Error}
 NotPlayer: §4请在游戏内执行此命令
 Form:
+   Back: §6返回
+   Close: §4关闭
+   EnchantList:
+      Title: §eEnchant管理
+      Content: §5您可以在此处管理您服务器能够快捷使用的附魔效果
+      EnchantItem: §5{EnchantName}§f<§8{EnchantID}§f>
+      addEnchant: §8新增条目
+   AdminSetting:
+      Title: §e更多设置
+      Content: ' '
+      ItemList: §4物品列表
+      EnchantList: §6附魔列表
+      NBTList: §7NBT列表
+      Setting: §8功能设置
+      NBTEditor: §8物品编辑
    MainForm:
       Title: '{RGBTextStart}{PluginName}{RGBTextEnd}'
+      Content: '{RandColor}欢迎使用由冰月开发的{RGBTextStart}{PluginName}{RGBTextEnd}'
+      notItem: §4当前交易市场没有任何一个商品
+      ShopItem: §6{ItemName}§d(§f{ItemID}§d:§f{ItemDamage}§d)§f|§8{ItemPrice} §4{ItemCount}§2个{n}§3卖家：§7{ByPlayer}
+      UpItem: §6上架物品
+      SearchItem: §5搜索商品
+      AdminSetting: §e管理设置
 Update:
    Start: §6检查更新中！若不想使用该功能或出现问题，请关闭该功能.
    Update: §6已检测到更新！{Msg} §4相关数据以储存到§5{ConfigName}

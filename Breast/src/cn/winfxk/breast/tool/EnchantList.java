@@ -246,7 +246,7 @@ public class EnchantList {
 			if (item.size() <= 0)
 				continue;
 			try {
-				list.add(new EnchantList(map.get("ID"), map.get("Name")));
+				list.add(new EnchantList(item.get("ID"), item.get("Name")));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

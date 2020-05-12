@@ -31,6 +31,8 @@ public class ItemList {
 		String string = Tool.objToString(obj);
 		if (obj == null || string == null || string.isEmpty())
 			return Tool.isInteger(Default) ? Tool.ObjToInt(Default) : 0;
+		if (obj instanceof Item)
+			return ((Item) obj).getId();
 		if (!Tool.isInteger(string)) {
 			if (string.contains(":")) {
 				String[] strings = string.split(":");
@@ -67,6 +69,8 @@ public class ItemList {
 		String string = Tool.objToString(obj);
 		if (obj == null || string == null || string.isEmpty())
 			return Tool.objToString(Default);
+		if (obj instanceof Item)
+			return getName((Item) obj, match, Default);
 		if (!Tool.isInteger(string)) {
 			if (string.contains(":")) {
 				int ID, Damage = 0;
@@ -74,7 +78,7 @@ public class ItemList {
 				if (Tool.isInteger(strings[0])) {
 					ID = Tool.ObjToInt(strings[0]);
 					if (strings.length >= 2 && Tool.isInteger(strings[1]))
-						Damage = Tool.ObjToInt(Damage);
+						Damage = Tool.ObjToInt(strings[1]);
 					return getName(ID, Damage, match, Default);
 				}
 			}
@@ -108,6 +112,8 @@ public class ItemList {
 		String string = Tool.objToString(obj);
 		if (obj == null || string == null || string.isEmpty())
 			return Tool.objToString(Default);
+		if (obj instanceof Item)
+			return getPath((Item) obj, match, Default);
 		if (!Tool.isInteger(string)) {
 			if (string.contains(":")) {
 				int ID, Damage = 0;
@@ -115,7 +121,7 @@ public class ItemList {
 				if (Tool.isInteger(strings[0])) {
 					ID = Tool.ObjToInt(strings[0]);
 					if (strings.length >= 2 && Tool.isInteger(strings[1]))
-						Damage = Tool.ObjToInt(Damage);
+						Damage = Tool.ObjToInt(strings[1]);
 					return getPath(ID, Damage, match, Default);
 				}
 			}
@@ -199,17 +205,6 @@ public class ItemList {
 	 */
 	public String getPath(Item item) {
 		return getPath(item.getId(), item.getDamage());
-	}
-
-	/**
-	 * 根据物品对象返回物品的贴图
-	 * 
-	 * @param item  物品对象
-	 * @param match 是否近似匹配物品特殊值
-	 * @return
-	 */
-	public String getPath(Item item, boolean match) {
-		return getPath(item.getId(), item.getDamage(), match, null);
 	}
 
 	/**
