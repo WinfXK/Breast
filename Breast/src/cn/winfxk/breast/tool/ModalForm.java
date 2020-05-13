@@ -88,7 +88,7 @@ public class ModalForm extends RootForm {
 	}
 
 	@Override
-	public FormWindow getFormWindow() {
+	protected FormWindow getFormWindow() {
 		return new FormWindowModal(Title, Content, Bt1, Bt2);
 	}
 }

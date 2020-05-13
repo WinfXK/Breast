@@ -54,7 +54,7 @@ public class SimpleForm extends RootForm {
 	}
 
 	@Override
-	public FormWindow getFormWindow() {
+	protected FormWindow getFormWindow() {
 		return new FormWindowSimple(Title == null ? "null" : Title, Content == null ? "null" : Content, buttons);
 	}
 

@@ -58,7 +58,7 @@ public class AdminSetting extends FormBase {
 			setForm(new NBTEditor(player, this));
 			break;
 		default:
-			return upForm == null ? true : setForm(upForm).make();
+			return isBack();
 		}
 		return make();
 	}

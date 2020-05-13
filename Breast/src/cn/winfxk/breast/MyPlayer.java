@@ -2,11 +2,15 @@ package cn.winfxk.breast;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.nukkit.Player;
+import cn.nukkit.item.Item;
 import cn.nukkit.utils.Config;
 import cn.winfxk.breast.form.FormBase;
+import cn.winfxk.breast.tool.Tool;
 
 /**
  * @author Winfxk
@@ -17,6 +21,8 @@ public class MyPlayer {
 	private Player player;
 	public FormBase form;
 	public int ID = 0;
+	public boolean isTrade = false;
+	public Player TradePlayer;
 
 	/**
 	 * 记录存储玩家的一些数据
@@ -29,6 +35,87 @@ public class MyPlayer {
 		config = ac.resCheck.Check(this);
 		config.set("name", player.getName());
 		config.save();
+	}
+
+	/**
+	 * 清空正在交易的物品
+	 * 
+	 * @return
+	 */
+	public boolean clearitem() {
+		config.set("Items", new HashMap<>());
+		return config.save();
+	}
+
+	/**
+	 * 获取正在交易的物品列表
+	 * 
+	 * @return
+	 */
+	public List<Item> getItems() {
+		Object obj = config.get("Items");
+		Map<String, Object> map = obj != null && obj instanceof Map ? (HashMap<String, Object>) obj : new HashMap<>();
+		List<Item> list = new ArrayList<>();
+		for (Object object : map.values())
+			list.add(Tool.loadItem((Map<String, Object>) object));
+		return list;
+	}
+
+	/**
+	 * 判断一个玩家是否缓存了物品
+	 * 
+	 * @return
+	 */
+	public boolean isSaveItem() {
+		Object obj = config.get("Items");
+		Map<String, Object> map = obj != null && obj instanceof Map ? (HashMap<String, Object>) obj : new HashMap<>();
+		return map.size() > 0;
+	}
+
+	/**
+	 * 加载玩家交易缓存的数据，并且吧缓存的物品给玩家
+	 * 
+	 * @return
+	 */
+	public boolean reloadItem() {
+		Object obj = config.get("Items");
+		Map<String, Object> map = obj != null && obj instanceof Map ? (HashMap<String, Object>) obj : new HashMap<>();
+		Item item;
+		for (Object object : map.values()) {
+			item = Tool.loadItem((Map<String, Object>) object);
+			player.getInventory().addItem(item);
+		}
+		config.set("Items", new HashMap<>());
+		return config.save();
+	}
+
+	/**
+	 * 缓存玩家交易中心的物品
+	 * 
+	 * @param list
+	 */
+	public boolean saveItem(List<Item> list) {
+		Map<String, Object> map = new HashMap<>();
+		for (Item item : list)
+			map.put(getsaveitemKey(map, 1), Tool.saveItem(item));
+		config.set("Items", map);
+		return config.save();
+	}
+
+	/**
+	 * 用于获取缓存交易中的物品的随机Key
+	 * 
+	 * @param map
+	 * @param JJLength
+	 * @return
+	 */
+	private String getsaveitemKey(Map<String, Object> map, int JJLength) {
+		String string = "";
+		for (int i = 0; i < JJLength; i++)
+			string += Tool.getRandString();
+		if (map.containsKey(string))
+			return getsaveitemKey(map, JJLength + 1);
+		return string;
 	}
 
 	/**

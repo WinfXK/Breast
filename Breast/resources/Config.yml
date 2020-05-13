@@ -1,6 +1,8 @@
 EconomyAPI货币名称: 金币
 默认货币: EconomyAPI
-检查更新: true
+检查更新: false
 #是否开启仅允许管理员设置
 astrictAdmin: false
 Admin: []
+上架手续费: 1000
+手续费货币: EconomyAPI

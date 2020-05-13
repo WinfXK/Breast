@@ -2,13 +2,23 @@ package cn.winfxk.breast;
 
 import java.time.Instant;
 
+import cn.nukkit.Player;
+import cn.nukkit.event.EventHandler;
+import cn.nukkit.event.Listener;
+import cn.nukkit.event.player.PlayerFormRespondedEvent;
+import cn.nukkit.event.player.PlayerJoinEvent;
+import cn.nukkit.event.player.PlayerQuitEvent;
+import cn.nukkit.form.response.FormResponse;
+import cn.nukkit.form.response.FormResponseCustom;
+import cn.nukkit.form.response.FormResponseModal;
+import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.plugin.PluginBase;
 
 /**
  * @Createdate 2020/05/09 09:25:55
  * @author Winfxk
  */
-public class Breast extends PluginBase {
+public class Breast extends PluginBase implements Listener {
 	public Instant loadTime;
 	private static Activate ac;
 
@@ -16,6 +26,7 @@ public class Breast extends PluginBase {
 	public void onEnable() {
 		loadTime = Instant.now();
 		ac = new Activate(this);
+		getServer().getPluginManager().registerEvents(this, this);
 		super.onEnable();
 	}
 
@@ -33,6 +44,67 @@ public class Breast extends PluginBase {
 		} catch (Exception e) {
 		}
 		super.onDisable();
+	}
+
+	@EventHandler
+	public void onQuit(PlayerQuitEvent e) {
+		Player player = e.getPlayer();
+		MyPlayer myPlayer = ac.getPlayers(player);
+		if (myPlayer.isTrade) {
+			myPlayer.reloadItem();
+			myPlayer.isTrade = false;
+			ac.getPlayers(myPlayer.TradePlayer).isTrade = false;
+		}
+		if (ac.isPlayers(player))
+			ac.removePlayers(player);
+	}
+
+	@EventHandler
+	public void onJoin(PlayerJoinEvent e) {
+		Player player = e.getPlayer();
+		if (!ac.isPlayers(player)) {
+			MyPlayer myPlayer = new MyPlayer(player);
+			myPlayer.reloadItem();
+			ac.setPlayers(player, myPlayer);
+		}
+	}
+
+	/**
+	 * 表单接受事件
+	 *
+	 * @param e
+	 */
+	@EventHandler
+	public void onFormResponded(PlayerFormRespondedEvent e) {
+		Player player = e.getPlayer();
+		try {
+			if (player == null)
+				return;
+			int ID = e.getFormID();
+			FormID f = ac.getFormID();
+			MyPlayer myPlayer = ac.getPlayers(player.getName());
+			if (myPlayer == null)
+				return;
+			FormResponse data = e.getResponse();
+			if ((ID == f.getID(0) || ID == f.getID(1) || ID == f.getID(2)) && myPlayer.form != null) {
+				if (e.wasClosed()) {
+					myPlayer.form.wasClosed();
+					return;
+				}
+				if (data == null || !(data instanceof FormResponseCustom) && !(data instanceof FormResponseSimple)
+						&& !(data instanceof FormResponseModal)) {
+					myPlayer.form = null;
+					return;
+				}
+				myPlayer.form.disMain(data);
+			}
+		} catch (Exception e2) {
+			e2.printStackTrace();
+			if (player != null)
+				player.sendMessage(ac.getMessage().getMessage("数据处理错误",
+						new String[] { "{Player}", "{Money}", "{Error}" },
+						new Object[] { player.getName(), MyPlayer.getMoney(player.getName()), e2.getMessage() }));
+		}
 	}
 
 	/**

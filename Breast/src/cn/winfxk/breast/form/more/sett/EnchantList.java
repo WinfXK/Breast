@@ -58,7 +58,7 @@ public class EnchantList extends FormBase {
 		case "add":
 			return setForm(new addItem(player, this)).make();
 		default:
-			return upForm == null ? true : setForm(upForm).make();
+			return isBack();
 		}
 	}
 }

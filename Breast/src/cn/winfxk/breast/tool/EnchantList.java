@@ -20,6 +20,33 @@ public class EnchantList {
 	private List<EnchantList> list = new ArrayList<>();
 
 	/**
+	 * 获取对应的附魔效果
+	 * 
+	 * @return
+	 */
+	public Enchantment getEnchant() {
+		return Enchantment.get(ID);
+	}
+
+	/**
+	 * 获取名称
+	 * 
+	 * @return
+	 */
+	public String getName() {
+		return Name;
+	}
+
+	/**
+	 * 获取EnchantID
+	 * 
+	 * @return
+	 */
+	public int getID() {
+		return ID;
+	}
+
+	/**
 	 * 根据一个未知值获取名称
 	 * 
 	 * @param obj     未知数据
@@ -237,6 +264,11 @@ public class EnchantList {
 		this.Name = Tool.objToString(Name);
 	}
 
+	/**
+	 * 重新加载数据
+	 * 
+	 * @return
+	 */
 	public int reload() {
 		list = new ArrayList<>();
 		Map<String, Object> map = ac.getEnchantListConfig().getAll();
@@ -254,6 +286,11 @@ public class EnchantList {
 		return list.size();
 	}
 
+	/**
+	 * 获取全部数据
+	 * 
+	 * @return
+	 */
 	public List<EnchantList> getAll() {
 		return new ArrayList<>(list);
 	}

@@ -2,3 +2,4 @@
 name: null
 #玩家的未读消息<Map>
 Message: []
+Items: []

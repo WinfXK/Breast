@@ -31,7 +31,6 @@ public abstract class FormBase implements Cloneable {
 	protected String[] K = {};
 	protected MyPlayer myPlayer;
 	protected List<String> listKey = new ArrayList<>();
-	protected static final String Close = "Close", Back = "Back";
 	protected ItemList itemList;
 
 	/**
@@ -54,9 +53,27 @@ public abstract class FormBase implements Cloneable {
 			e.printStackTrace();
 			this.upForm = null;
 		}
+		reload();
+		itemList = ac.getItems();
+	}
+
+	/**
+	 * 刷新页面数据
+	 */
+	protected FormBase reload() {
 		setK("{Player}", "{Money}");
 		setD(player.getName(), myPlayer.getMoney());
-		itemList = ac.getItems();
+		return this;
+	}
+
+	/**
+	 * 当玩家是关闭窗口的时候调用
+	 * 
+	 * @return
+	 */
+	public boolean wasClosed() {
+		myPlayer.form = null;
+		return true;
 	}
 
 	/**
@@ -84,6 +101,15 @@ public abstract class FormBase implements Cloneable {
 	 */
 	protected String getContent() {
 		return msg.getSun(t, Son, "Content", this);
+	}
+
+	/**
+	 * 设置当前的文本文件的获取文本
+	 * 
+	 * @param son
+	 */
+	public void setSon(String son) {
+		Son = son;
 	}
 
 	/**
@@ -218,7 +244,7 @@ public abstract class FormBase implements Cloneable {
 	public boolean make() {
 		if (make == null)
 			throw new FormException("The interface is empty, unable to display normally! Please contact Winfxk.");
-		return (myPlayer.form = make).MakeMain();
+		return (myPlayer.form = make.reload()).MakeMain();
 	}
 
 	@Override
@@ -261,6 +287,15 @@ public abstract class FormBase implements Cloneable {
 	 */
 	protected String getString(String string) {
 		return msg.getSun(t, Son, string, this);
+	}
+
+	/**
+	 * 返回或关闭当前页面
+	 * 
+	 * @return
+	 */
+	protected boolean isBack() {
+		return upForm == null ? true : setForm(upForm).make();
 	}
 
 	@Override

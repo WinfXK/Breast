@@ -1,18 +1,16 @@
-package cn.winfxk.breast.form.more;
+package cn.winfxk.breast.form.t;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponse;
 import cn.winfxk.breast.form.FormBase;
 
 /**
- * 删除商店项目页面
- * 
- * @Createdate 2020/05/12 11:05:40
+ * @Createdate 2020/05/13 17:06:17
  * @author Winfxk
  */
-public class DeleteItem extends FormBase {
+public class ItemList extends FormBase {
 
-	public DeleteItem(Player player, FormBase upForm) {
+	public ItemList(Player player, FormBase upForm) {
 		super(player, upForm);
 	}
 
@@ -25,5 +23,4 @@ public class DeleteItem extends FormBase {
 	public boolean disMain(FormResponse data) {
 		return false;
 	}
-
 }

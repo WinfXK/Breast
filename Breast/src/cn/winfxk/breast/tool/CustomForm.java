@@ -294,7 +294,7 @@ public class CustomForm extends RootForm {
 	}
 
 	@Override
-	public FormWindow getFormWindow() {
+	protected FormWindow getFormWindow() {
 		return new FormWindowCustom(Title, list, Icon == null ? "" : Icon);
 	}
 

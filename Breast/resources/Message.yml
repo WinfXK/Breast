@@ -29,6 +29,214 @@ NotPlayer: §4请在游戏内执行此命令
 Form:
    Back: §6返回
    Close: §4关闭
+   OpenedDealMsg:
+      Title: §6确认交易
+      Content: §6{ByPlayer}已经确定交易物品，清您再次确认交易物品
+      Confirm: §6确定交易
+      lookItem: §6查看物品
+      OK: §6交易成功
+   TradeRequestOflookItem:
+      Title: 查看物品
+      ItemFormat: §9{ItemName}§f(§5{ItemID}§f:§5{ItemDamage}§f)>§b>§d>§2{ItemCount}
+      SelectItem: §6请选择想要查看的物品
+   TradeRequest:
+      Title: 来至{ByPlayer}的交易请求
+      Content: §6{ByPlayer}正在请求和您交易！是否接受？
+      Confirm: §6确定交易
+      lookItem: §6查看物品
+   TransactionOfMainConfirmForm:
+      Title: 确认交易
+      Content: 您当前已选择{ItemCount}种物品，交易对象：{ByPlayer}{n}{n}确定该交易吗？
+      ToMe: §4你不能和自己交易
+      Confirm: §6确定交易
+   TransactionOfSelectItem:
+      Title: §6添加交易物品
+      Content: ' '
+      SelectItem: §6请选择想要交易的物品
+      notItem: §6你没有可供交易的物品
+      ConfirmItems: §6停止选择物品
+      SelectCount: §6选择物品数量
+      addItem: §6添加物品成功！
+      loadItemOK: §6已经加载您上次交易失败的物品
+      wasClosed: §6{Player}关闭了交易窗口！交易关闭。
+      ItemFormat: §9{ItemName}§f(§5{ItemID}§f:§5{ItemDamage}§f)>§b>§d>§2{ItemCount}
+   Transaction:
+      Title: §6发起交易
+      Content: 您已经选择了{ItemCount}种物品，你可以开始选择您的交易对象了
+      notPlayer: §6没有玩家可以和您交易
+      PlayerItem: §9{ByPlayer}§f>§b>§d>§4{ByMoney}
+   ShowItemDataOfShowLore:
+      notLore: §6这个物品没有Lore
+      Title: '{ItemName}'
+      Content: 名称：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}持有数量：{ItemCount}
+   ShowItemDataOfShowEnchat:
+      Title: '{ItemName}'
+      Content: 名称：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}持有数量：{ItemCount}
+      notEnchant: §6这个物品没有附魔！
+      EnchatItem: §6{EnchantName}§f(§5{EnchantID}§f)>§b>§d>§8{EnchantLevel}
+   ShowItemData:
+      Title: '{ItemName}'
+      Content: 名称：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}持有数量：{ItemCount}
+      EnchantList: §6查看附魔
+      LoreList: §6查看Lore
+   UpItem:
+      Title: '{ItemName}'
+      Air: §6不能上架空气
+      SelectCount: 请选择物品数量
+      InputMoney: §6请输入出售价格
+      Content: 名称：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}持有数量：{ItemCount}
+      notUInputMoney: §6您还没有输入物品售价或售价格式不合理！
+      SelectEconomy: §6请选择想要使用的货币
+      UPOK: §6上架物品成功！
+      EconomyError: §4货币不可用！请联系管理员。
+      reduceMoney: §6上架扣除手续费：{UpMoney}
+      NotMoney: §4你没有足够的货币支付手续费！
+   SelectItem:
+      Title: §6上架商品
+      Content: ' '
+      notItem: §6你没有物品可以用来上架！
+      SelectItem: §6选择一个想要上架的物品
+      ItemFormat: §6{ItemName}§9(§4{ItemID}§f:§4{ItemDamage})§f>§b>§d>§8{ItemCount}
+   SearchItem:
+      Title: 商品搜索
+      Content: ' '
+      InputKeyword: §6请输入搜索关键字
+      SearchName: 搜索物品名称
+      SearchID: 搜索物品ID
+      SearchDamage: 搜索物品Damage
+      SearchLore: 搜索物品Lore
+      SearchEnchant: 搜索物品附魔
+      notKeyword: §4您还没有输入关键字！
+   ShopFormClickItem:
+      Title: '{ItemName}'
+      Content: 名称：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}价格：{ItemPrice}{n}数量：{ItemCount}{n}卖家：{ByPlayer}{n}需要货币：{EconomyName}
+      Buy: §6购买
+      del: §4删除
+      ShowData: §6查看物品数据
+      delOK: §4删除成功！
+      oneself: §6你不能购买自己的物品！
+      notMoney: §6您的{EconomyName}不足！
+      BuyOK: §8你购买了§6{ByPlayer}§8的§6{ItemName}§8！扣除§5{ItemPrice}§8{EconomyName}
+      ByBuy: §6{Player}§8购买了您的§6{ItemName}§8！获得§5{ItemPrice}§8{EconomyName}
+   NBTList:
+      Title: NBTList
+      Content: ' '
+      delOK: §6您删除了一个NBT
+   NBTEditorOfEditItemOfImportNBT:
+      Title: §4{ItemName}
+      Content: ' '
+      notNBT: §6当前没有可供导入的NBT数据！
+      ImportOK: §6导入成功！
+   NBTEditorOfEditItemOfSaveNBT:
+      Title: 保存NBT
+      Content: ' '
+      InputName: §6请输入想要保存的NBT名称
+      SaveOK: §6保存成功！
+      notInputName: §6您还没有输入名称！
+      NameIsExist: §6该名称已存在！
+   NBTEditorOfEditItemOfLoreEditOfaddLore:
+      Title: §4{ItemName}
+      Content: ' '
+      addLore: §6请输入Lore
+      notInputLore: §6您还没有输入Lore
+      addOK: §6添加成功！
+   NBTEditorOfEditItemOfLoreEdit:
+      Title: §4{ItemName}
+      Content: ' '
+      addLore: §6添加Lore
+      del: §6您删除了一个Lore
+   NBTEditorOfEditItemOfNameEdit:
+      Title: §4{ItemName}
+      Content: ' '
+      setName: §6请输入物品名称
+      setOK: §6设置成功
+      notInputName: §6您还没有输入物品名称
+   NBTEditorOfEditItemOfsetCount:
+      Title: §4{ItemName}
+      Content: ' '
+      setCount: §6请设置一个数量
+      setOK: §6设置成功！
+   NBTEditorOfEditItemOfDamageEdit:
+      Title: §4{ItemName}
+      Content: ' '
+      InputDamage: §6请输入一个损坏值
+      NotInputDamage: §4您还没有输入损坏值或损坏值不合法！
+      setOK: §6您成功捡物品的损坏值设置为：{ItemDamage}
+   NBTEditorOfEditItemOfEnchantEditOfaddItem:
+      Title: §4{ItemName}
+      Content: ' '
+      SelectItem: §6请选择想要添加的附魔效果
+      InputLevel: §6请输入附魔等级
+      EnchantItem: §6{EnchantName}§f-§6{EnchantID}
+      addOK: §6你添加了一个：{EnchantName}
+   NBTEditorOfEditItemOfEnchantEdit:
+      Title: §4{ItemName}
+      Content: ' '
+      EnchantItem: §6{EnchantName}§f-§6{EnchantID}
+      addEnchant: §6新增附魔
+      delOK: §6您删除了一个附魔效果：{EnchantName}
+   NBTEditorOfEditItem:
+      Title: §4{ItemName}
+      Content: 请选择您想要编辑的内容
+      Enchant: §6附魔编辑
+      Name: §6名称编辑
+      Lore: §6Lore编辑
+      Damage: §6Damage编辑
+      setCount: §6设置物品数量
+      Import: §6从已有NBT导入
+      Save: §6保存当前NBT
+   NBTEditor:
+      Title: §6NBT编辑器
+      Content: ' '
+      SelectItem: §6请先选择一个您想要编辑的物品
+      ItemFormat: §4{ItemName}§f(§1{ItemID}§f-§1{ItemDamage}§f)
+   ItemListOfaddItem:
+      Title: §6新建Item
+      Content: ' '
+      InputID: §6请输入物品ID
+      InputName: §6请输入物品名称
+      InputDamage: §6请输入物品Damage
+      InputPath: §6请输入物品贴图路径
+      notInputID: §6您还没有输入物品ID或ID不合法！
+      notInputDamage: §4您还没有输入物品Damage或Damage不合法
+      notInputName: §4您还没有输入物品名称
+      notInputPath: §4您还没有输入物品贴图路径
+      newOK: §6新建成功
+   ItemListOfdelItem:
+      Title: '{ItemName}'
+      Content: '§6ID: {ItemID}{n}§7Damage: {ItemDamage}{n}§8Name: {ItemName}{n}§9Path: {ItemPatn}{n}您确定要删除吗'
+      Confirm: §4确定
+      DelOK: §4您成功删除了这个条目
+      NotItem: §4该项目不存在！
+   ItemListOfClickItem:
+      Title: '{ItemName}'
+      Content: '§6ID: {ItemID}{n}§7Damage: {ItemDamage}{n}§8Name: {ItemName}{n}§9Path: {ItemPatn}'
+      del: §4删除该项目
+      NotItem: §4该项目不存在！
+   ItemList:
+      Title: §6ItemList
+      Content: ' '
+      ItemFormat: §4{ItemName}§f(§1{ItemID}§f-§1{ItemDamage}§f)
+      newItem: §6新增条目
+   EnchantOfClickItem:
+      Title: '{EnchantName}'
+      Content: '§4Enchant-ID: {EnchantID}{n}§5Enchant-Name: {EnchantName}'
+      del: §4删除
+      NotItem: §4该项目不存在！
+   EnchantOfdelItem:
+      Title: §4删除Enchant条目
+      Content: '§4Enchant-ID: {EnchantID}{n}§5Enchant-Name: {EnchantName}{n}领取定要删除这个条目吗?'
+      Confirm: §6确定
+      NotItem: §4该项目不存在！
+      DelOK: §4您成功删除了这个条目
+   EnchantOfaddItem:
+      Title: §9新增Enchant条目
+      Content: §4您可以在此处添加该插件没有但Minecraft有的Enchant效果
+      InputID: §6请输入ID
+      InputName: §6请输入名称
+      NotInputID: §4您还没有输入EnchantID或EnchantID不合法！
+      NotInputName: §4您还没有输入Enchant名称
+      newOK: §6您成功新建了一个Enchant条目
    EnchantList:
       Title: §eEnchant管理
       Content: §5您可以在此处管理您服务器能够快捷使用的附魔效果
@@ -50,6 +258,7 @@ Form:
       UpItem: §6上架物品
       SearchItem: §5搜索商品
       AdminSetting: §e管理设置
+      Transaction: §6发起交易
 Update:
    Start: §6检查更新中！若不想使用该功能或出现问题，请关闭该功能.
    Update: §6已检测到更新！{Msg} §4相关数据以储存到§5{ConfigName}

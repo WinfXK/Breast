@@ -37,7 +37,7 @@ public abstract class RootForm {
 	 *
 	 * @return
 	 */
-	public abstract FormWindow getFormWindow();
+	protected abstract FormWindow getFormWindow();
 
 	/**
 	 * 设置表单ID

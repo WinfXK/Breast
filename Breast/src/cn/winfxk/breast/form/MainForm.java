@@ -11,7 +11,7 @@ import cn.nukkit.item.Item;
 import cn.winfxk.breast.form.more.AdminSetting;
 import cn.winfxk.breast.form.more.ClickItem;
 import cn.winfxk.breast.form.more.SearchItem;
-import cn.winfxk.breast.form.more.UpItem;
+import cn.winfxk.breast.form.more.SelectItem;
 import cn.winfxk.breast.tool.SimpleForm;
 import cn.winfxk.breast.tool.Tool;
 
@@ -45,7 +45,7 @@ public class MainForm extends FormBase {
 				item = Tool.loadItem((Map<String, Object>) map2.get("Item"));
 				form.addButton(getString("ShopItem", ShopItemK,
 						new Object[] { player.getName(), myPlayer.getMoney(), itemList.getName(item, true, null),
-								item.getId(), item.getDamage(), map2.get("Money"), map2.get("Player"),
+								item.getId(), item.getDamage(), map2.get("Money"), item.getCount(), map2.get("Player"),
 								map2.get("EconomyName") }));
 				listKey.add(Tool.objToString(map2.get("Key")));
 			}
@@ -59,6 +59,10 @@ public class MainForm extends FormBase {
 			more.add("as");
 			form.addButton(getString("AdminSetting"));
 		}
+		if (player.getInventory().getContents().size() >= 1) {
+			more.add("tt");
+			form.addButton(getString("Transaction"));
+		}
 		more.add("bk");
 		form.addButton(getBack());
 		form.sendPlayer(player);
@@ -71,6 +75,9 @@ public class MainForm extends FormBase {
 		if (listKey.size() < ID)
 			return setForm(new ClickItem(player, this, listKey.get(ID))).make();
 		switch (more.get(ID - listKey.size())) {
+		case "tt":
+			setForm(new cn.winfxk.breast.form.t.SelectItem(player, this));
+			break;
 		case "si":
 			setForm(new SearchItem(player, this));
 			break;
@@ -78,10 +85,10 @@ public class MainForm extends FormBase {
 			setForm(new AdminSetting(player, this));
 			break;
 		case "up":
-			setForm(new UpItem(player, this));
+			setForm(new SelectItem(player, this));
 			break;
 		default:
-			return upForm == null ? true : setForm(upForm).make();
+			return isBack();
 		}
 		return make();
 	}
