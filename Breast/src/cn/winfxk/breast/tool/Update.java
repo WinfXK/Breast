@@ -1,6 +1,5 @@
 package cn.winfxk.breast.tool;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -48,21 +47,6 @@ public class Update {
 								.info(activate.getMessage().getSon("Update", "Update",
 										new String[] { "{Msg}", "{ConfigName}", "{Versions}" },
 										new Object[] { map.get("Msg"), ConfigName, map.get("V") }));
-						try {
-							String path = this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-							File fsFile = new File(path);
-							Tool.DownFile(map.get("Http"), fsFile.getName(), mis.getServer().getPluginPath());
-							mis.getLogger().info(activate.getMessage().getSon("Update", "Donwload",
-									new String[] { "{Msg}", "{ConfigName}", "{Versions}", "{FileName}" },
-									new Object[] { map.get("Msg"), ConfigName, map.get("V"), fsFile.getName() }));
-							mis.getServer().reload();
-						} catch (Exception e) {
-							mis.getLogger()
-									.info(activate.getMessage().getSon("Update", "Downerror",
-											new String[] { "{Msg}", "{ConfigName}", "{Versions}", "{Error}" },
-											new Object[] { map.get("Msg"), ConfigName, map.get("V"), e.getMessage() }));
-							e.printStackTrace();
-						}
 						LinkedHashMap<String, Object> map2 = new LinkedHashMap<>();
 						map2.put("下载地址", map.get("Http"));
 						map2.put("更新内容", map.get("Msg"));
@@ -83,7 +67,6 @@ public class Update {
 		} catch (Exception e) {
 			mis.getLogger().info(activate.getMessage().getSon("Update", "UpdateThreadError", new String[] { "{Error}" },
 					new Object[] { e.getMessage() }));
-			e.printStackTrace();
 		}
 	}
 }

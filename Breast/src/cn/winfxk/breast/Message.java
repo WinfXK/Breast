@@ -189,7 +189,7 @@ public class Message {
 	 * @return
 	 */
 	public String getSun(String t, String Son, String Sun, MyPlayer myPlayer) {
-		return getSun(t, Son, Sun, Dk, getList(myPlayer));
+		return myPlayer == null ? getSun(t, Son, Sun) : getSun(t, Son, Sun, Dk, getList(myPlayer));
 	}
 
 	/**
@@ -539,6 +539,8 @@ public class Message {
 	}
 
 	private List<Object> getList(MyPlayer player) {
+		if (player == null)
+			return new ArrayList<>();
 		List<Object> list = new ArrayList<>();
 		list.add(player.getPlayer().getName());
 		list.add(player.getMoney());

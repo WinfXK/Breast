@@ -1,0 +1,285 @@
+#All kinds of customizable content
+#Note: if variables can be used, all variables are surrounded by {}, such as {ServerName}
+# note: variables are case sensitive!
+# attention!!
+# attention!!# attention!!# attention!!
+# attention!!# attention!!# attention!!# attention!!# attention!!
+#The value at the beginning of the sea is surrounded by '!As follows, if not at the beginning of the curly brace, it can be open-ended
+#FF_SB: '{true}'
+#Winfxk: is {TheHandsomeBoy}
+#Note: currently available global variables include: n: newline, ServerName: ServerName, PluginName: plug-in name, RandColor: random color, server currency name: {MoneyName}
+#If there is no shortcut menu to detect the content that will be prompted, the variable is available: Player: Player name
+lang: eng-English
+权限不足: §4You do not have permission to perform this operation!
+插件启动: '{RGBTextStart}{PluginName} Start!(start time: {loadTime})...{RGBTextEnd}        §6Welcome {RGBTextStart} use {PluginName}{RGBTextEnd}§f(*￣︶￣)'
+无法初始化配置: '§4Unable to initialize configuration file: {FileName}, please check!'
+无法效验语言文件: §4Unable to validate the language file!Please check!
+请在游戏内自行命令: §4Please execute this command in the game!
+插件关闭: '{RGBTextStart}{PluginName}Has been shut down!Thanks for using!{RGBTextEnd}{RandColor}If the economy allows, hope to
+   be able to sponsor!Alipay: 2508543202@qq.com'
+数据加载错误: §4Unable to read game data!Please delete all the data and try to recreate it!
+无法获取已支持的语言列表: §4Unable to get list of supported languages!
+无法加载资源: §4Unable to load resource
+无法加载特权配置: §4Cannot load VIP configuration ({FileName})!{Error}
+加载特权规则: §9{Count}§6 privilege configurations have been loaded
+无法加载系统数据: §4System data could not be loaded
+无法获取币种: §4Cannot get the corresponding currency!Please contact the server administrator!
+金币不足: §4Your Money is not sufficient to complete this operation!
+数据处理错误: §4Unable to process this operation!Please contact the server administrator!{n}{Error}
+NotPlayer: §4Please execute this command in the game
+Command:
+   Parameters:
+      deal: Initiate real-time trading
+      main: §e{PluginName} Home
+      up: Store items to {PluginName} store
+      langs: See the list of languages supported by {PluginName}
+      lang: Set the {PluginName} language
+      help: '{PluginName} help'
+   setLanguage:
+      notInputID: §4Please enter the language ID you want to use
+      notID: §4The language file ID you entered does not exist!
+      WriteSucceed: §6Export the language file successfully!Some languages take effect after restarting ~
+      WriteError: §4Language file export failed!
+   Languages:
+      LanguageItem: §f[§d{LanguageID}§f] §b-§d>§6 {LanguageName}
+      SelectLanguage: §6Please select the language file you want to use
+Form:
+   Back: §6Back
+   Close: §4Close
+   OpenedDealMsg:
+      Title: §6The confirmation
+      Content: §6{ByPlayer}has confirmed the transaction items, please confirm the transaction items again
+      Confirm: §6Confirm
+      lookItem: §6LookItem
+      OK: §6A successful deal
+   TradeRequestOflookItem:
+      Title: LookItem
+      ItemFormat: §9{ItemName}§f(§5{ItemID}§f:§5{ItemDamage}§f)>§b>§d>§2{ItemCount}
+      SelectItem: §6Please select the item you want to view
+   TradeRequest:
+      Title: A transaction request from {ByPlayer} has arrived
+      Content: §6{ByPlayer} is requesting to trade with you!Do you accept it?
+      Confirm: §6Confirm
+      lookItem: §6lookItem
+   TransactionOfMainConfirmForm:
+      Title: The confirmation
+      Content: 'You have currently selected items {ItemCount}, the trade object: {ByPlayer}{n}{n} to determine the trade?'
+      ToMe: §4You can't trade with yourself
+      Confirm: §6Confirm
+   TransactionOfSelectItem:
+      Title: §6Add transaction items
+      Content: ' '
+      SelectItem: §6Please select the item you want to trade
+      notItem: §6You have nothing to trade
+      ConfirmItems: §6Stop selecting items
+      SelectCount: §6Select item quantity
+      addItem: §6Item added successfully!
+      loadItemOK: §6Items that failed in your last transaction have been loaded
+      wasClosed: §6{Player} closed the transaction window!Trading is closed.
+      ItemFormat: §9{ItemName}§f(§5{ItemID}§f:§5{ItemDamage}§f)>§b>§d>§2{ItemCount}
+   Transaction:
+      Title: §6A transaction
+      Content: Now that you have selected the {ItemCount} items, you are ready to select your trade
+      notPlayer: §6No player can trade with you
+      PlayerItem: §9{ByPlayer}§f>§b>§d>§4{ByMoney}
+   ShowItemDataOfShowLore:
+      notLore: §6There is no Lore in this item
+      Title: '{ItemName}'
+      Content: Name：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}Hold：{ItemCount}
+   ShowItemDataOfShowEnchat:
+      Title: '{ItemName}'
+      Content: Name：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}Hold：{ItemCount}
+      notEnchant: §6This item is not enchanted!
+      EnchatItem: §6{EnchantName}§f(§5{EnchantID}§f)>§b>§d>§8{EnchantLevel}
+   ShowItemData:
+      Title: '{ItemName}'
+      Content: Name：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}Hold：{ItemCount}
+      EnchantList: §6Check the enchanting
+      LoreList: §6To view the Lore
+   UpItem:
+      Title: '{ItemName}'
+      Air: §6No shelf air
+      SelectCount: Please select quantity of items
+      InputMoney: §6Please enter the selling price
+      Content: Name：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}Hold：{ItemCount}
+      notUInputMoney: §6You have not entered the item price or price format is not reasonable!
+      SelectEconomy: §6Please select the currency you want to use
+      UPOK: §6Shelf goods success!
+      EconomyError: §4Currency is not available!Please contact the administrator.
+      reduceMoney: '§6Handling fee for shelving: {UpMoney}'
+      NotMoney: §4You don't have enough currency to pay the commission!
+   SelectItem:
+      Title: §6Goods shelves
+      Content: ' '
+      notItem: §6You have nothing to put on the shelf!
+      SelectItem: §6Choose an item you want to put on the shelf
+      ItemFormat: §6{ItemName}§9(§4{ItemID}§f:§4{ItemDamage})§f>§b>§d>§8{ItemCount}
+   SearchItem:
+      Title: Commodity search
+      Content: ' '
+      InputKeyword: §6Please enter the search keyword
+      SearchName: Search item name
+      SearchID: Search item ID
+      SearchDamage: Search item Damage
+      SearchLore: Search item Lore
+      SearchEnchant: Search for item enchant
+      notKeyword: §4You have not entered the keyword yet!
+   ShopFormClickItem:
+      Title: '{ItemName}'
+      Content: Name：{ItemName}{n}ID：{ItemID}{n}Damage：{ItemDamage}{n}Price：{ItemPrice}{n}Count：{ItemCount}{n}Seller：{ByPlayer}{n}EconomyType：{EconomyName}
+      Buy: §6Buy
+      del: §4Delete
+      ShowData: §6View item data
+      delOK: §4Deleted successfully!
+      oneself: §6You can't buy your own stuff!
+      notMoney: §6Your {EconomyName} is insufficient!
+      BuyOK: §8You bought §6{ByPlayer}§8 the §6{ItemName}§8！deduct §5{ItemPrice} §8{EconomyName}
+      ByBuy: §6{Player}§8 purchased your §6{ItemName}§8！get §5{ItemPrice} §8{EconomyName}
+   NBTList:
+      Title: NBTList
+      Content: ' '
+      delOK: §6You deleted an NBT
+   NBTEditorOfEditItemOfImportNBT:
+      Title: §4{ItemName}
+      Content: ' '
+      notNBT: §6Currently no NBT data is available for import!
+      ImportOK: §6Import successful!
+   NBTEditorOfEditItemOfSaveNBT:
+      Title: Save the NBT
+      Content: ' '
+      InputName: §6Please enter the name of the NBT you want to save
+      SaveOK: §6Save successfully!
+      notInputName: §6You have not entered a name yet!
+      NameIsExist: §6The name already exists!
+   NBTEditorOfEditItemOfLoreEditOfaddLore:
+      Title: §4{ItemName}
+      Content: ' '
+      addLore: §6Please enter the Lore
+      notInputLore: §6You have not entered Lore
+      addOK: §6Add successful!
+   NBTEditorOfEditItemOfLoreEdit:
+      Title: §4{ItemName}
+      Content: ' '
+      addLore: §6Add the Lore
+      del: §6You have removed a Lore
+   NBTEditorOfEditItemOfNameEdit:
+      Title: §4{ItemName}
+      Content: ' '
+      setName: §6Please enter the item name
+      setOK: §6Set up the success
+      notInputName: §6You have not entered the item name
+   NBTEditorOfEditItemOfsetCount:
+      Title: §4{ItemName}
+      Content: ' '
+      setCount: §6Please set a quantity
+      setOK: §6Setup successful!
+   NBTEditorOfEditItemOfDamageEdit:
+      Title: §4{ItemName}
+      Content: ' '
+      InputDamage: §6Please enter a Damage
+      NotInputDamage: §4It is illegal that you have not entered Damage or Damage value!
+      setOK: §6Damage is set to：{ItemDamage}
+   NBTEditorOfEditItemOfEnchantEditOfaddItem:
+      Title: §4{ItemName}
+      Content: ' '
+      SelectItem: §6Please select the enchantment effect you want to add
+      InputLevel: §6Please enter the enchantment level
+      EnchantItem: §6{EnchantName}§f-§6{EnchantID}
+      addOK: §6You add one：{EnchantName}
+   NBTEditorOfEditItemOfEnchantEdit:
+      Title: §4{ItemName}
+      Content: ' '
+      EnchantItem: §6{EnchantName}§f-§6{EnchantID}
+      addEnchant: §6New enchant
+      delOK: §6You have removed an enchantment effect：{EnchantName}
+   NBTEditorOfEditItem:
+      Title: §4{ItemName}
+      Content: Please select what you want to edit
+      Enchant: §6Enchant editor
+      Name: §6The name of the editor
+      Lore: §6The Lore editor
+      Damage: §6Damage edit
+      setCount: §6Set item quantity
+      Import: §6Import from an existing NBT
+      Save: §6Save the current NBT
+   NBTEditor:
+      Title: §6NBT editor
+      Content: ' '
+      SelectItem: §6Please select an item you want to edit first
+      ItemFormat: §4{ItemName}§f(§1{ItemID}§f-§1{ItemDamage}§f)
+   ItemListOfaddItem:
+      Title: §6The new Item
+      Content: ' '
+      InputID: §6Please enter the item ID
+      InputName: §6Please enter the item name
+      InputDamage: §6Please enter Damage
+      InputPath: §6Please enter the item map path
+      notInputID: §6You have not entered the item ID or ID is illegal!
+      notInputDamage: §4You have not entered Damage or Damage is illegal
+      notInputName: §4You have not entered the item name
+      notInputPath: §4You have not entered the item map path
+      newOK: §6New success
+   ItemListOfdelItem:
+      Title: '{ItemName}'
+      Content: '§6ID: {ItemID}{n}§7Damage: {ItemDamage}{n}§8Name: {ItemName}{n}§9Path: {ItemPatn}{n}Are you sure you want to delete it?'
+      Confirm: §4Confirm
+      DelOK: §4You successfully deleted the entry
+      NotItem: §4The project does not exist!
+   ItemListOfClickItem:
+      Title: '{ItemName}'
+      Content: '§6ID: {ItemID}{n}§7Damage: {ItemDamage}{n}§8Name: {ItemName}{n}§9Path: {ItemPatn}'
+      del: §4Delete the item
+      NotItem: §4The project does not exist!
+   ItemList:
+      Title: §6ItemList
+      Content: ' '
+      ItemFormat: §4{ItemName}§f(§1{ItemID}§f-§1{ItemDamage}§f)
+      newItem: §6New items
+   EnchantOfClickItem:
+      Title: '{EnchantName}'
+      Content: '§4Enchant-ID: {EnchantID}{n}§5Enchant-Name: {EnchantName}'
+      del: §4delete
+      NotItem: §4The project does not exist!
+   EnchantOfdelItem:
+      Title: §4Delete the Enchant entry
+      Content: '§4Enchant-ID: {EnchantID}{n}§5Enchant-Name: {EnchantName}{n}Must I delete this entry?'
+      Confirm: §6Confirm
+      NotItem: §4The project does not exist!
+      DelOK: §4You successfully deleted the entry
+   EnchantOfaddItem:
+      Title: §9New Enchant entry
+      Content: §4You can add an Enchant effect here that the plugin does not have but does have in Minecraft
+      InputID: §6Please enter the ID
+      InputName: §6Please enter a name
+      NotInputID: §4You have not entered EnchantID or EnchantID is illegal!
+      NotInputName: §4You have not entered the Enchant name
+      newOK: §6You have successfully created an Enchant entry
+   EnchantList:
+      Title: §eEnchant management
+      Content: §5Here you can manage the enchantment effects that your server can use quickly
+      EnchantItem: §5{EnchantName}§f<§8{EnchantID}§f>
+      addEnchant: §8New items
+   AdminSetting:
+      Title: §eMore Settings
+      Content: ' '
+      ItemList: §4List of items
+      EnchantList: §6Enchant list
+      NBTList: §7NBT list
+      Setting: §8Feature set
+      NBTEditor: §8Item editor
+   MainForm:
+      Title: '{RGBTextStart}{PluginName}{RGBTextEnd}'
+      Content: '{RandColor}Welcome to {RGBTextStart}{PluginName}{RGBTextEnd} developed by Winfxk'
+      notItem: §4There is no commodity currently traded on the market
+      ShopItem: §6{ItemName}§d(§f{ItemID}§d:§f{ItemDamage}§d)§f|§8{ItemPrice} §4{ItemCount}§2个{n}§3Seller：§7{ByPlayer}
+      UpItem: §6On items
+      SearchItem: §5Search for goods
+      AdminSetting: §eManagement Settings
+      Transaction: §6A transaction
+Update:
+   Start: §6Check for updates!If you do not want to use this feature or if there is a problem, turn it off.
+   Update: §6Update detected!{Msg} §4 relevant data to be stored in §5{ConfigName}
+   NotUpdate: §6No update yet!
+   UpdateError: §4Error updating data!
+   ErrorConnect: §4Unable to connect to update server!
+   UpdateThreadError: §4Update error!Please check!§f {Error}

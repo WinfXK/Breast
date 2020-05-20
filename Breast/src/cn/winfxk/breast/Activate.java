@@ -3,7 +3,7 @@ package cn.winfxk.breast;
 import java.io.File;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +15,7 @@ import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
 import cn.nukkit.utils.Config;
 import cn.nukkit.utils.Utils;
+import cn.winfxk.breast.cmd.MyCommand;
 import cn.winfxk.breast.money.EconomyAPI;
 import cn.winfxk.breast.money.EconomyManage;
 import cn.winfxk.breast.money.MyEconomy;
@@ -82,10 +83,11 @@ public class Activate {
 		if (config.getBoolean("检查更新"))
 			(new Update(kis)).start();
 		items = new ItemList(this);
+		kis.getServer().getCommandMap().register(kis.getName(), new MyCommand(this));
 		enchants = new EnchantList(this);
 		NBTConfig = new Config(new File(mis.getDataFolder(), NBTName), Config.YAML);
 		kis.getLogger().info(message.getMessage("插件启动", "{loadTime}",
-				(float) Duration.between(mis.loadTime, Instant.now()).toMillis() + "ms") + "-Alpha");
+				(float) Duration.between(mis.loadTime, Instant.now()).toMillis() + "ms") + "-Beta");
 	}
 
 	/**
@@ -181,20 +183,18 @@ public class Activate {
 	}
 
 	/**
-	 * 获取自定义命令内容
-	 *
-	 * @param string
+	 * 获取插奸指令
+	 * 
 	 * @return
 	 */
-	public String[] getCommands(String string, String string2) {
-		Object obj = CommandConfig.get(string);
-		Map<String, List<Object>> map = obj != null && obj instanceof Map ? (HashMap<String, List<Object>>) obj
-				: new HashMap<>();
-		List<Object> list = map.get(string2);
-		String[] s = new String[list.size()];
+	public String[] getCommand() {
+		Object obj = CommandConfig.get("Command");
+		List<String> list = obj != null && obj instanceof List ? (List<String>) obj
+				: obj instanceof Map ? new ArrayList<>(((Map<String, Object>) obj).keySet()) : new ArrayList<>();
+		String[] strings = new String[list.size()];
 		for (int i = 0; i < list.size(); i++)
-			s[i] = Tool.objToString(list.get(i));
-		return s;
+			strings[i] = list.get(i);
+		return strings;
 	}
 
 	/**
