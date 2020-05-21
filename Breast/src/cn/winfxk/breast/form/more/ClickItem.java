@@ -30,6 +30,7 @@ public class ClickItem extends FormBase {
 		super(player, upForm);
 		this.Key = Key;
 		config = ac.getShopConfig();
+		setSon("ShopFormClickItem");
 		Map<String, Object> map2 = (Map<String, Object>) ac.getShopConfig().get(Key);
 		item = Tool.loadItem((Map<String, Object>) map2.get("Item"));
 		setK("{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemPrice}", "{ItemCount}",
@@ -67,6 +68,10 @@ public class ClickItem extends FormBase {
 			player.sendMessage(getString("delOK"));
 			return config.save() && isBack();
 		case "b":
+			if (ByPlayer == null) {
+				player.sendMessage(getString("ByPlayerNull"));
+				return MakeMain();
+			}
 			if (ByPlayer.equals(player.getName())) {
 				player.sendMessage(getString("oneself"));
 				return isBack();

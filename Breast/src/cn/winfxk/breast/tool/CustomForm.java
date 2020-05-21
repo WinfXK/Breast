@@ -242,6 +242,7 @@ public class CustomForm extends RootForm {
 	 * @return
 	 */
 	public CustomForm addDropdown(String Text, List<String> Options, int DefaultOption) {
+		DefaultOption = DefaultOption >= Options.size() ? Options.size() - 1 : DefaultOption < 0 ? 0 : DefaultOption;
 		list.add(new ElementDropdown(Text, Options, DefaultOption));
 		return this;
 	}
@@ -255,6 +256,7 @@ public class CustomForm extends RootForm {
 	 * @return
 	 */
 	public CustomForm addDropdown(String Text, String[] Options, int DefaultOption) {
+		DefaultOption = DefaultOption >= Options.length ? Options.length - 1 : DefaultOption < 0 ? 0 : DefaultOption;
 		list.add(new ElementDropdown(Text, Arrays.asList(Options), DefaultOption));
 		return this;
 	}

@@ -53,6 +53,7 @@ public class SelectItem extends FormBase {
 
 	@Override
 	public boolean disMain(FormResponse data) {
-		return setForm(new UpItem(player, this, list.get(getSimple(data).getClickedButtonId()))).make();
+		return setForm(new UpItem(player, upForm, list.get(getCustom(data).getDropdownResponse(1).getElementID())))
+				.make();
 	}
 }

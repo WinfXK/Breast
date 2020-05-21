@@ -43,17 +43,18 @@ public abstract class FormBase implements Cloneable {
 		this.player = player;
 		ac = Activate.getActivate();
 		msg = ac.getMessage();
-		formID = ac.getFormID();
 		myPlayer = ac.getPlayers(player.getName());
+		reload();
+		formID = ac.getFormID();
 		Son = getClass().getSimpleName();
 		Name = getClass().getSimpleName();
-		try {
-			this.upForm = upForm.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-			this.upForm = null;
-		}
-		reload();
+		if (upForm != null)
+			try {
+				this.upForm = upForm.clone();
+			} catch (CloneNotSupportedException e) {
+				e.printStackTrace();
+				this.upForm = null;
+			}
 		itemList = ac.getItems();
 	}
 
@@ -61,8 +62,10 @@ public abstract class FormBase implements Cloneable {
 	 * 刷新页面数据
 	 */
 	protected FormBase reload() {
-		setK("{Player}", "{Money}");
-		setD(player.getName(), myPlayer.getMoney());
+		if (K.length <= 0)
+			setK("{Player}", "{Money}");
+		if (D.length <= 0)
+			setD(player.getName(), myPlayer.getMoney());
 		return this;
 	}
 
@@ -82,7 +85,7 @@ public abstract class FormBase implements Cloneable {
 	 * @return
 	 */
 	protected String getBack() {
-		return msg.getSon(t, upForm == null ? "Back" : "Close", this);
+		return msg.getSon(t, upForm != null ? "Back" : "Close", this);
 	}
 
 	/**

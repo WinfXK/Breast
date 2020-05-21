@@ -9,6 +9,7 @@ import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.item.Item;
 import cn.nukkit.utils.Config;
 import cn.winfxk.breast.form.FormBase;
+import cn.winfxk.breast.form.MainForm;
 import cn.winfxk.breast.money.MyEconomy;
 import cn.winfxk.breast.tool.CustomForm;
 import cn.winfxk.breast.tool.Tool;
@@ -34,17 +35,17 @@ public class UpItem extends FormBase {
 			if (item.equals(item, true, true))
 				Count += item.getCount();
 		}
-		ac.getEconomyManage().getEconomy(ac.getConfig().getString("手续费货币"));
+		economy = ac.getEconomyManage().getEconomy(ac.getConfig().getString("手续费货币"));
 		UpMoney = ac.getConfig().getDouble("上架手续费");
 		config = ac.getShopConfig();
 		map = config.getAll();
 		setK("{UpMoney}", "{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemPatn}", "{ItemCount}");
-		setD(UpMoney, player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(), item.getDamage(),
-				itemList.getPath(item), Count);
 	}
 
 	@Override
 	public boolean MakeMain() {
+		setD(UpMoney, player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(), item.getDamage(),
+				itemList.getPath(item), Count);
 		if (item.getId() == 0) {
 			player.sendMessage(getString("Air"));
 			return isBack();
@@ -83,7 +84,7 @@ public class UpItem extends FormBase {
 		string = d.getDropdownResponse(3).getElementContent();
 		item.setCount(Count);
 		Map<String, Object> iMap = new HashMap<>();
-		iMap.put("ByPlayer", player.getName());
+		iMap.put("Player", player.getName());
 		iMap.put("Item", Tool.saveItem(item));
 		iMap.put("Money", Money);
 		iMap.put("EconomyName", string);
@@ -94,7 +95,7 @@ public class UpItem extends FormBase {
 		player.getInventory().remove(item);
 		config.set(Key, iMap);
 		player.sendMessage(getString("UPOK"));
-		return config.save() && isBack();
+		return config.save() && setForm(new MainForm(player, null)).make();
 	}
 
 	/**

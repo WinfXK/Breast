@@ -27,11 +27,11 @@ public class MainForm extends FormBase {
 
 	public MainForm(Player player, FormBase upForm) {
 		super(player, upForm);
-		map = ac.getShopConfig().getAll();
 	}
 
 	@Override
 	public boolean MakeMain() {
+		map = ac.getShopConfig().getAll();
 		SimpleForm form = new SimpleForm(getID(), getTitle(), getContent());
 		if (map.size() > 0) {
 			Map<String, Object> map2;
@@ -72,24 +72,25 @@ public class MainForm extends FormBase {
 	@Override
 	public boolean disMain(FormResponse data) {
 		int ID = getSimple(data).getClickedButtonId();
-		if (listKey.size() < ID)
-			return setForm(new ClickItem(player, this, listKey.get(ID))).make();
-		switch (more.get(ID - listKey.size())) {
-		case "tt":
-			setForm(new cn.winfxk.breast.form.t.SelectItem(player, this));
-			break;
-		case "si":
-			setForm(new SearchItem(player, this));
-			break;
-		case "as":
-			setForm(new AdminSetting(player, this));
-			break;
-		case "up":
-			setForm(new SelectItem(player, this));
-			break;
-		default:
-			return isBack();
+		if (more.size() > 0 && ID >= listKey.size()) {
+			switch (more.get(ID - listKey.size())) {
+			case "tt":
+				setForm(new cn.winfxk.breast.form.t.SelectItem(player, this));
+				break;
+			case "si":
+				setForm(new SearchItem(player, this));
+				break;
+			case "as":
+				setForm(new AdminSetting(player, this));
+				break;
+			case "up":
+				setForm(new SelectItem(player, this));
+				break;
+			default:
+				return isBack();
+			}
+			return make();
 		}
-		return make();
+		return setForm(new ClickItem(player, this, listKey.get(ID))).make();
 	}
 }

@@ -2,6 +2,8 @@ package cn.winfxk.breast.cmd;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
@@ -49,14 +51,13 @@ public class MyCommand extends Command {
 		commandParameters.put(msg.getSun("Command", "Parameters", "deal"),
 				new CommandParameter[] { new CommandParameter(msg.getSun("Command", "Parameters", "deal"), false,
 						new String[] { "deal", "交易" }) });
+		commandParameters.put(msg.getSun("Command", "Parameters", "admin"),
+				new CommandParameter[] { new CommandParameter(msg.getSun("Command", "Parameters", "admin"), false,
+						new String[] { "admin", "管理员" }) });
 	}
 
 	@Override
 	public boolean execute(CommandSender sender, String commandLabel, String[] args) {
-		if (!sender.hasPermission("Breast.Command.main")) {
-			sender.sendMessage(msg.getMessage("权限不足"));
-			return true;
-		}
 		MyPlayer myPlayer = ac.getPlayers(sender.getName());
 		if (args == null || args.length <= 0)
 			if (!sender.isPlayer())
@@ -65,12 +66,37 @@ public class MyCommand extends Command {
 				myPlayer.form = new MainForm(myPlayer.getPlayer(), null);
 				return myPlayer.form.MakeMain();
 			}
+		if (!sender.hasPermission("Breast.Command.main")) {
+			sender.sendMessage(msg.getMessage("权限不足", myPlayer));
+			return true;
+		}
 		File file;
 		File[] files;
 		String[] KK;
 		String string;
 		int ID;
 		switch (args[0].toLowerCase()) {
+		case "admin":
+		case "管理员":
+			if (sender.isPlayer()) {
+				sender.sendMessage(msg.getSun("Command", "Admin", "isPlayer", myPlayer));
+				return true;
+			}
+			if (args.length < 2) {
+				sender.sendMessage(msg.getSun("Command", "Admin", "notInputPlayerName", myPlayer));
+				break;
+			}
+			Object obj = ac.getConfig().get("Admin");
+			List<String> list = obj != null && obj instanceof List ? (ArrayList<String>) obj : new ArrayList<>();
+			if (list.contains(args[1]))
+				list.remove(args[1]);
+			else
+				list.add(args[1]);
+			ac.getConfig().set("Admin", list);
+			ac.getConfig().save();
+			sender.sendMessage(
+					msg.getSun("Command", "Admin", list.contains(args[1]) ? "setAdmin" : "removeAdmin", myPlayer));
+			break;
 		case "deal":
 		case "交易":
 			if (!sender.isPlayer()) {

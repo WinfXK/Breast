@@ -27,6 +27,11 @@ lang: chs-中文
 数据处理错误: §4无法处理该操作！请联系服务器管理员{n}{Error}
 NotPlayer: §4请在游戏内执行此命令
 Command:
+   Admin:
+      isPlayer: §4请在控制台执行此命令！
+      notInputPlayerName: §4请输入想要设置或取消管理员身份的玩家名称！
+      setAdmin: §6已成功添加一个管理员身份
+      removeAdmin: §4已成功移除一个玩家的管理员身份
    Parameters:
       deal: 发起实时交易
       main: §e{PluginName}主页
@@ -34,6 +39,7 @@ Command:
       langs: 查看{PluginName}支持的语言列表
       lang: 设置{PluginName}语言
       help: '{PluginName}帮助'
+      admin: 设置或取消插件管理员
    setLanguage:
       notInputID: §4请输入想要使用的语言ID
       notID: §4您输入的语言文件ID不存在！
@@ -45,6 +51,17 @@ Command:
 Form:
    Back: §6返回
    Close: §4关闭
+   Setting: 
+      Title: §6系统设置
+      Content: " "
+      MainEconomyName: §6请输入默认货币名称
+      Economy: §6请选择一个默认货币
+      Update: §6检查更新
+      ServiceCharge: §6物品上架手续费
+      ServiceChargeEconomy: §6手续费使用的货币
+      notInputMainEconomyName: §4你还没有输入默认货币名称
+      ServiceChargeIllegal: §4您还没有输入物品上架手续费或上架手续费不合法！
+      SettingOK: §6设置成功！部分设置可能需要重启后生效。
    OpenedDealMsg:
       Title: §6确认交易
       Content: §6{ByPlayer}已经确定交易物品，清您再次确认交易物品
@@ -134,6 +151,7 @@ Form:
       notMoney: §6您的{EconomyName}不足！
       BuyOK: §8你购买了§6{ByPlayer}§8的§6{ItemName}§8！扣除§5{ItemPrice}§8{EconomyName}
       ByBuy: §6{Player}§8购买了您的§6{ItemName}§8！获得§5{ItemPrice}§8{EconomyName}
+      ByPlayerNull: §4无法获取卖家信息！请联系管理员
    NBTList:
       Title: NBTList
       Content: ' '
