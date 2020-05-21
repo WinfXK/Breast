@@ -87,7 +87,7 @@ public class Activate {
 		enchants = new EnchantList(this);
 		NBTConfig = new Config(new File(mis.getDataFolder(), NBTName), Config.YAML);
 		kis.getLogger().info(message.getMessage("插件启动", "{loadTime}",
-				(float) Duration.between(mis.loadTime, Instant.now()).toMillis() + "ms") + "-Gamma");
+				(float) Duration.between(mis.loadTime, Instant.now()).toMillis() + "ms") + "-Delte");
 	}
 
 	/**

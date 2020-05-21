@@ -6,3 +6,4 @@ astrictAdmin: false
 Admin: []
 上架手续费: 1000
 手续费货币: EconomyAPI
+物品列表显示数量: 20

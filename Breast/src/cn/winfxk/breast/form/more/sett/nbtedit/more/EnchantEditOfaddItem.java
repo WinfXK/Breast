@@ -27,6 +27,7 @@ public class EnchantEditOfaddItem extends FormBase {
 		super(player, upForm);
 		this.Index = Index;
 		setSon("NBTEditorOfEditItemOfEnchantEditOfaddItem");
+		item = player.getInventory().getContents().get(Index);
 		setK("{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemPatn}");
 		setD(player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(), item.getDamage(),
 				itemList.getPath(item));
@@ -64,7 +65,12 @@ public class EnchantEditOfaddItem extends FormBase {
 		enchantment.setLevel(Level > enchantment.getMaxLevel() ? enchantment.getMaxLevel() : Level);
 		item.addEnchantment(enchantment);
 		player.getInventory().setItem(Index, item);
-		player.sendMessage(getString("addOK"));
+		player.sendMessage(getString("addOK",
+				new String[] { "{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemPatn}",
+						"{EnchantName}", "{EnchantID}" },
+				new Object[] { player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(),
+						item.getDamage(), itemList.getPath(item), ac.getEnchants().getName(enchantment),
+						enchantment.id }));
 		return isBack();
 	}
 }

@@ -31,15 +31,16 @@ public class Transaction extends FormBase {
 	public boolean MakeMain() {
 		setD(player.getName(), myPlayer.getMoney(), list.size());
 		players = new ArrayList<>(Server.getInstance().getOnlinePlayers().values());
-		if (players.size() <= 0) {
+		if (players.size() <= 1) {
 			player.sendMessage(getString("notPlayer"));
 			return wasClosed() && isBack();
 		}
 		String[] KK = { "{Player}", "{Money}", "{ByPlayer}", "{ByMoney}" };
 		SimpleForm form = new SimpleForm(getID(), getTitle(), getContent());
 		for (Player player : players)
-			form.addButton(getString("PlayerItem", KK, new Object[] { myPlayer.getName(), myPlayer.getMoney(),
-					player.getName(), MyPlayer.getMoney(player.getName()) }));
+			if (!player.getName().equals(this.player.getName()))
+				form.addButton(getString("PlayerItem", KK, new Object[] { myPlayer.getName(), myPlayer.getMoney(),
+						player.getName(), MyPlayer.getMoney(player.getName()) }));
 		form.addButton(getBack());
 		form.sendPlayer(player);
 		return true;
@@ -56,7 +57,7 @@ public class Transaction extends FormBase {
 	@Override
 	public boolean disMain(FormResponse data) {
 		int ID = getSimple(data).getClickedButtonId();
-		if (players.size() < ID)
+		if (players.size() > ID)
 			return setForm(new ConfirmForm(player, upForm, list, players.get(ID))).make();
 		return wasClosed() && isBack();
 	}

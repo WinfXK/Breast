@@ -2,7 +2,7 @@ name: Breast
 main: cn.winfxk.breast.Breast
 api:
 - 1.0.0
-version: 1.0-Gamma
+version: 1.0-Delte
 website: http://Winfxk.EpicFX.cn
 description: 物品编辑器
 author: Winfxk

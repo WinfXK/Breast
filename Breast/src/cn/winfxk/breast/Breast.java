@@ -77,14 +77,14 @@ public class Breast extends PluginBase implements Listener {
 	@EventHandler
 	public void onFormResponded(PlayerFormRespondedEvent e) {
 		Player player = e.getPlayer();
+		if (player == null)
+			return;
+		int ID = e.getFormID();
+		FormID f = ac.getFormID();
+		MyPlayer myPlayer = ac.getPlayers(player.getName());
+		if (myPlayer == null)
+			return;
 		try {
-			if (player == null)
-				return;
-			int ID = e.getFormID();
-			FormID f = ac.getFormID();
-			MyPlayer myPlayer = ac.getPlayers(player.getName());
-			if (myPlayer == null)
-				return;
 			FormResponse data = e.getResponse();
 			if ((ID == f.getID(0) || ID == f.getID(1) || ID == f.getID(2)) && myPlayer.form != null) {
 				if (e.wasClosed()) {
@@ -100,10 +100,10 @@ public class Breast extends PluginBase implements Listener {
 			}
 		} catch (Exception e2) {
 			e2.printStackTrace();
-			if (player != null)
-				player.sendMessage(ac.getMessage().getMessage("数据处理错误",
-						new String[] { "{Player}", "{Money}", "{Error}" },
-						new Object[] { player.getName(), MyPlayer.getMoney(player.getName()), e2.getMessage() }));
+			if (myPlayer.form != null)
+				myPlayer.form.onError(e2);
+			player.sendMessage(ac.getMessage().getMessage("数据处理错误", new String[] { "{Player}", "{Money}", "{Error}" },
+					new Object[] { player.getName(), MyPlayer.getMoney(player.getName()), e2.getMessage() }));
 		}
 	}
 

@@ -21,7 +21,6 @@ public class setCount extends FormBase {
 		this.Index = Index;
 		setSon("NBTEditorOfEditItemOfsetCount");
 		item = player.getInventory().getContents().get(Index);
-		setSon("NBTEditorOfEditItem");
 		setK("{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemPatn}");
 		setD(player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(), item.getDamage(),
 				itemList.getPath(item));

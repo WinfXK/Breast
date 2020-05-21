@@ -12,6 +12,7 @@ import cn.winfxk.breast.Activate;
 import cn.winfxk.breast.FormID;
 import cn.winfxk.breast.Message;
 import cn.winfxk.breast.MyPlayer;
+import cn.winfxk.breast.Usewarning;
 import cn.winfxk.breast.tool.ItemList;
 
 /**
@@ -86,6 +87,21 @@ public abstract class FormBase implements Cloneable {
 	 */
 	protected String getBack() {
 		return msg.getSon(t, upForm != null ? "Back" : "Close", this);
+	}
+
+	/**
+	 * 如果界面执行错误将会调用的方法
+	 * 
+	 * @param e
+	 * @return
+	 */
+	@Usewarning
+	public boolean onError(Exception e) {
+		try {
+			wasClosed();
+		} catch (Exception e2) {
+		}
+		return false;
 	}
 
 	/**

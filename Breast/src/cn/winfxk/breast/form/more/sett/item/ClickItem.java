@@ -42,6 +42,7 @@ public class ClickItem extends FormBase {
 		}
 		SimpleForm form = new SimpleForm(getID(), getTitle(), getContent());
 		form.addButton(getString("del"));
+		form.addButton(getBack());
 		form.sendPlayer(player);
 		return true;
 	}

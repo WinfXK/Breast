@@ -3,7 +3,6 @@ package cn.winfxk.breast.form.more.sett.nbtedit;
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.item.Item;
-import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.utils.Config;
 import cn.winfxk.breast.form.FormBase;
 import cn.winfxk.breast.tool.SimpleForm;
@@ -24,7 +23,6 @@ public class ImportNBT extends FormBase {
 		this.Index = Index;
 		setSon("NBTEditorOfEditItemOfImportNBT");
 		item = player.getInventory().getContents().get(Index);
-		setSon("NBTEditorOfEditItem");
 		setK("{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemPatn}");
 		setD(player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(), item.getDamage(),
 				itemList.getPath(item));
@@ -56,8 +54,8 @@ public class ImportNBT extends FormBase {
 	@Override
 	public boolean disMain(FormResponse data) {
 		int ID = getSimple(data).getClickedButtonId();
-		if (listKey.size() < ID) {
-			item.setCompoundTag((CompoundTag) config.get(listKey.get(ID)));
+		if (listKey.size() > ID) {
+			item.setCompoundTag((byte[]) config.get(listKey.get(ID)));
 			player.getInventory().setItem(Index, item);
 			player.sendMessage(getString("ImportOK"));
 		}

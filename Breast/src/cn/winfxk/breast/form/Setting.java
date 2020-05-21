@@ -37,6 +37,8 @@ public class Setting extends FormBase {
 		form.addInput(getString("ServiceCharge"), config.get("上架手续费"), getString("ServiceCharge"));
 		form.addDropdown(getString("ServiceChargeEconomy"), ac.getEconomyManage().getEconomy(),
 				ac.getEconomyManage().getEconomy().indexOf(config.getString("手续费货币")));
+		form.addSlider(getString("ShowItemCount"), 1, ac.getItemListConfig().getAll().size(), 1,
+				config.getInt("物品列表显示数量"));
 		form.sendPlayer(player);
 		return true;
 	}
@@ -58,11 +60,13 @@ public class Setting extends FormBase {
 		}
 		MyEconomy updatEconomy = ac.getEconomyManage().getEconomy(d.getDropdownResponse(5).getElementContent());
 		ac.setEconomy(EconomyName);
+		int ItemListShowList = Tool.ObjToInt(d.getSliderResponse(6));
 		config.set("EconomyAPI货币名称", EconomyName);
 		config.set("默认货币", economy.getEconomyName());
 		config.set("检查更新", Update);
 		config.set("上架手续费", Tool.objToDouble(string));
 		config.set("手续费货币", updatEconomy.getEconomyName());
+		config.set("物品列表显示数量", ItemListShowList);
 		player.sendMessage(getString("SettingOK"));
 		return config.save() && isBack();
 	}

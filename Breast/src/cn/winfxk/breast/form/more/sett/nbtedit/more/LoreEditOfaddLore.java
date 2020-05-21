@@ -1,7 +1,5 @@
 package cn.winfxk.breast.form.more.sett.nbtedit.more;
 
-import java.util.Arrays;
-
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.item.Item;
@@ -20,7 +18,6 @@ public class LoreEditOfaddLore extends FormBase {
 		super(player, upForm);
 		setSon("NBTEditorOfEditItemOfLoreEdit");
 		item = player.getInventory().getContents().get(index);
-		setSon("NBTEditorOfEditItem");
 		setK("{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemPatn}");
 		setD(player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(), item.getDamage(),
 				itemList.getPath(item));
@@ -47,9 +44,11 @@ public class LoreEditOfaddLore extends FormBase {
 			player.sendMessage(getString("notInputLore"));
 			return isBack();
 		}
-		listKey = Arrays.asList(item.getLore());
-		listKey.add(string);
-		item.setLore((String[]) listKey.toArray());
+		String[] strings = new String[item.getLore().length + 1];
+		for (int i = 0; i < item.getLore().length; i++)
+			strings[i] = item.getLore()[i];
+		strings[strings.length - 1] = getCustom(data).getInputResponse(1);
+		item.setLore(strings);
 		player.getInventory().setItem(index, item);
 		player.sendMessage(getString("addOK"));
 		return isBack();

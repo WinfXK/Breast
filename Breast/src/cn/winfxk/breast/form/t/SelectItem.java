@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import cn.nukkit.Player;
+import cn.nukkit.Server;
 import cn.nukkit.form.response.FormResponse;
 import cn.nukkit.item.Item;
 import cn.winfxk.breast.form.FormBase;
@@ -21,7 +22,7 @@ import cn.winfxk.breast.tool.Tool;
 public class SelectItem extends FormBase {
 	private Map<Integer, Item> items;
 	private List<Integer> indexs = new ArrayList<>();
-	private List<Item> list = new ArrayList<>(), oflist;
+	private List<Item> list, oflist;
 	private boolean isSend = false;
 	private Player ofPlayer;
 
@@ -39,6 +40,10 @@ public class SelectItem extends FormBase {
 		oflist = ofList;
 		this.ofPlayer = ofPlayer;
 		isSend = true;
+		if (myPlayer.isSaveItem()) {
+			myPlayer.reloadItem();
+			player.sendMessage(getString("loadItemOK"));
+		}
 	}
 
 	/**
@@ -58,9 +63,15 @@ public class SelectItem extends FormBase {
 
 	@Override
 	public boolean MakeMain() {
+		if (Server.getInstance().getOnlinePlayers().size() <= 1) {
+			player.sendMessage(getString("notPlayer"));
+			return isBack();
+		}
+		listKey = new ArrayList<>();
 		items = player.getInventory().getContents();
 		SimpleForm form = new SimpleForm(getID(), getTitle(), getContent());
 		Item item;
+		indexs = new ArrayList<>();
 		String[] KK = { "{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemCount}", "{ItemPath}" };
 		for (Integer i : items.keySet()) {
 			item = items.get(i);
@@ -100,9 +111,9 @@ public class SelectItem extends FormBase {
 	@Override
 	public boolean disMain(FormResponse data) {
 		int ID = getSimple(data).getClickedButtonId();
-		if (indexs.size() < ID)
+		if (indexs.size() > ID)
 			return setForm(new SelectCount(player, this, items.get(indexs.get(ID)))).make();
-		switch (listKey.get(indexs.size() - ID)) {
+		switch (listKey.get(ID - indexs.size())) {
 		case "sok":
 			if (isSend) {
 				myPlayer.saveItem(list);
@@ -149,7 +160,15 @@ public class SelectItem extends FormBase {
 			player.getInventory().remove(item);
 			list.add(item);
 			player.sendMessage(SelectItem.this.getString("addItem"));
-			return SelectItem.this.MakeMain();
+			myPlayer.saveItem(list);
+			for (Item item : player.getInventory().getContents().values())
+				if (item.getId() != 0) {
+					myPlayer.form = SelectItem.this;
+					return SelectItem.this.MakeMain();
+				}
+			if (isSend)
+				return setForm(new OpenedDealMsg(ofPlayer, oflist, upForm, player, list)).make();
+			return setForm(new Transaction(player, upForm, list)).make();
 		}
 	}
 }

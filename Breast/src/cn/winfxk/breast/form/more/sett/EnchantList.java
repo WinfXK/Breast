@@ -52,7 +52,7 @@ public class EnchantList extends FormBase {
 	@Override
 	public boolean disMain(FormResponse data) {
 		int ID = getSimple(data).getClickedButtonId();
-		if (listKey.size() < ID)
+		if (listKey.size() > ID)
 			return setForm(new ClickItem(player, this, listKey.get(ID))).make();
 		switch (more.get(ID - listKey.size())) {
 		case "add":

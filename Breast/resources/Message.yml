@@ -54,6 +54,7 @@ Form:
    Setting: 
       Title: §6系统设置
       Content: " "
+      ShowItemCount: 插件支持物品列表显示数量
       MainEconomyName: §6请输入默认货币名称
       Economy: §6请选择一个默认货币
       Update: §6检查更新
@@ -90,6 +91,7 @@ Form:
       ConfirmItems: §6停止选择物品
       SelectCount: §6选择物品数量
       addItem: §6添加物品成功！
+      notPlayer: §6没有玩家可以和您交易
       loadItemOK: §6已经加载您上次交易失败的物品
       wasClosed: §6{Player}关闭了交易窗口！交易关闭。
       ItemFormat: §9{ItemName}§f(§5{ItemID}§f:§5{ItemDamage}§f)>§b>§d>§2{ItemCount}
@@ -222,6 +224,7 @@ Form:
    NBTEditor:
       Title: §6NBT编辑器
       Content: ' '
+      notItem: §4你没有物品可供编辑！
       SelectItem: §6请先选择一个您想要编辑的物品
       ItemFormat: §4{ItemName}§f(§1{ItemID}§f-§1{ItemDamage}§f)
    ItemListOfaddItem:
@@ -250,6 +253,8 @@ Form:
    ItemList:
       Title: §6ItemList
       Content: ' '
+      Next: §6下一页
+      Last: §6上一页 
       ItemFormat: §4{ItemName}§f(§1{ItemID}§f-§1{ItemDamage}§f)
       newItem: §6新增条目
    EnchantOfClickItem:

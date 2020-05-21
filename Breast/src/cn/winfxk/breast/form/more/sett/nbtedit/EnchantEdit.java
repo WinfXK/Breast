@@ -36,12 +36,8 @@ public class EnchantEdit extends FormBase {
 		super(player, upForm);
 		this.Index = Index;
 		setSon("NBTEditorOfEditItemOfEnchantEdit");
-		item = player.getInventory().getContents().get(Index);
-		setSon("NBTEditorOfEditItem");
-		setK("{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemPatn}");
-		setD(player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(), item.getDamage(),
-				itemList.getPath(item));
 		eList = ac.getEnchants();
+		setK("{Player}", "{Money}", "{ItemName}", "{ItemID}", "{ItemDamage}", "{ItemPatn}");
 	}
 
 	@Override
@@ -50,12 +46,16 @@ public class EnchantEdit extends FormBase {
 			player.sendMessage(getString("权限不足"));
 			return isBack();
 		}
+		item = player.getInventory().getContents().get(Index);
+		setD(player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(), item.getDamage(),
+				itemList.getPath(item));
 		SimpleForm form = new SimpleForm(getID(), getTitle(), getContent());
-		for (Enchantment enchant : item.getEnchantments()) {
-			form.addButton(getString("EnchantItem", KK,
-					new Object[] { player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(),
-							item.getDamage(), itemList.getPath(item), eList.getName(enchant), enchant.getId() }));
-		}
+		if (item.getEnchantments().length > 0)
+			for (Enchantment enchant : item.getEnchantments()) {
+				form.addButton(getString("EnchantItem", KK,
+						new Object[] { player.getName(), myPlayer.getMoney(), itemList.getName(item), item.getId(),
+								item.getDamage(), itemList.getPath(item), eList.getName(enchant), enchant.getId() }));
+			}
 		form.addButton(getString("addEnchant"));
 		form.addButton(getBack());
 		form.sendPlayer(player);
@@ -65,7 +65,7 @@ public class EnchantEdit extends FormBase {
 	@Override
 	public boolean disMain(FormResponse data) {
 		int ID = getSimple(data).getClickedButtonId();
-		if (item.getEnchantments().length < ID) {
+		if (item.getEnchantments().length > ID) {
 			Enchantment enchantment = item.getEnchantments()[ID];
 			List<Enchantment> list = Arrays.asList(item.getEnchantments());
 			list.remove(enchantment);

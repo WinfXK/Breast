@@ -43,9 +43,14 @@ public class NBTEditor extends FormBase {
 					itemList.getName(item), item.getId(), item.getDamage(), itemList.getPath(item) }));
 			list.add(i);
 		}
+		if (listKey.size() <= 0) {
+			player.sendMessage(getString("notItem"));
+			return isBack();
+		}
 		int index = list.contains(player.getInventory().getHeldItemIndex())
 				? list.indexOf(player.getInventory().getHeldItemIndex())
 				: 0;
+		form.addLabel(getContent());
 		form.addDropdown(getString("SelectItem"), listKey, index);
 		form.sendPlayer(player);
 		return true;
@@ -53,7 +58,6 @@ public class NBTEditor extends FormBase {
 
 	@Override
 	public boolean disMain(FormResponse data) {
-		int Index = list.get(getSimple(data).getClickedButtonId());
-		return setForm(new EditItem(player, upForm, Index)).make();
+		return setForm(new EditItem(player, upForm, getCustom(data).getDropdownResponse(1).getElementID())).make();
 	}
 }
